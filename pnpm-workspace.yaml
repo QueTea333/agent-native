@@ -1,5 +1,6 @@
 packages:
   - packages/*
+  - apps/*
   - templates/.retired/*
   - templates/*
   - templates/*/desktop
