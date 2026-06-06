@@ -65,3 +65,68 @@ export const workspaceSecrets = table("workspace_secrets", {
 });
 
 export const workspaceSecretShares = createSharesTable("workspace_secret_shares");
+
+// --- Phase 1 Additions ---
+
+// Epic 1.1: Mail (Threads and Emails)
+export const threads = table("threads", {
+  id: text("id").primaryKey(),
+  subject: text("subject"),
+  lastMessageAt: text("last_message_at"),
+  createdAt: text("created_at").default(now()),
+  updatedAt: text("updated_at").default(now()),
+  ...ownableColumns(),
+});
+
+export const emails = table("emails", {
+  id: text("id").primaryKey(),
+  threadId: text("thread_id").notNull(),
+  from: text("from").notNull(),
+  to: text("to").notNull(),
+  subject: text("subject"),
+  body: text("body"),
+  sentAt: text("sent_at"),
+  createdAt: text("created_at").default(now()),
+  updatedAt: text("updated_at").default(now()),
+  ...ownableColumns(),
+});
+
+export const threadShares = createSharesTable("thread_shares");
+export const emailShares = createSharesTable("email_shares");
+
+// Epic 1.2: Calendar (Calendars, Events, and Booking Links)
+export const calendars = table("calendars", {
+  id: text("id").primaryKey(),
+  name: text("name").notNull(),
+  type: text("type").notNull(), // 'google', 'outlook', etc.
+  createdAt: text("created_at").default(now()),
+  updatedAt: text("updated_at").default(now()),
+  ...ownableColumns(),
+});
+
+export const events = table("events", {
+  id: text("id").primaryKey(),
+  calendarId: text("calendar_id").notNull(),
+  title: text("title").notNull(),
+  description: text("description"),
+  location: text("location"),
+  startTime: text("start_time").notNull(),
+  endTime: text("end_time").notNull(),
+  createdAt: text("created_at").default(now()),
+  updatedAt: text("updated_at").default(now()),
+  ...ownableColumns(),
+});
+
+export const bookingLinks = table("booking_links", {
+  id: text("id").primaryKey(),
+  name: text("name").notNull(),
+  slug: text("slug").unique().notNull(),
+  config: text("config"), // JSON configuration for availability, duration, etc.
+  createdAt: text("created_at").default(now()),
+  updatedAt: text("updated_at").default(now()),
+  ...ownableColumns(),
+});
+
+export const calendarShares = createSharesTable("calendar_shares");
+export const eventShares = createSharesTable("event_shares");
+export const bookingLinkShares = createSharesTable("booking_link_shares");
