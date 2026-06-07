@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Button } from "@agent-native/dispatch/components/ui/button";
+import { Card, CardHeader, CardTitle, CardContent } from "@agent-native/dispatch/components/ui/card";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@agent-native/dispatch/components/ui/table";
 import { IconKey, IconPlus, IconTrash } from "@tabler/icons-react";
 
 export default function SecretsPage() {
